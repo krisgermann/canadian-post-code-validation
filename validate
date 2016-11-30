@@ -28,7 +28,7 @@ jQuery(function ($) {
         if (formattedPostalCode) {
             input.val(formattedPostalCode);
         } else {
-            alert('invalid postal code');
+            alert('You've entered an invalid postal code, please try again');
         }
     });
 });
