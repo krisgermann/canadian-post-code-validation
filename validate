@@ -1,0 +1,34 @@
+jQuery(function ($) {
+    var normalizePostalCode = function (postalCode) {
+        return postalCode.replace(/[^a-z0-9]/gi, '').toUpperCase();
+    };
+
+    var formatPostalCode = function (postalCode) {
+        var regex = /^([abceghjklmnprstvwxyz][0-9][abceghjklmnprstvwxyz])([0-9][abceghjklmnprstvwxyz][0-9])$/i;
+
+        var normalized = normalizePostalCode(postalCode);
+        
+        var matches = normalized.match(regex);
+
+        if (matches) {
+            return matches[1] + ' ' + matches[2];
+        }
+
+        return false;
+    };
+
+    $('#test').submit(function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        var input = $('#postalCode');
+
+        var formattedPostalCode = formatPostalCode(input.val());
+
+        if (formattedPostalCode) {
+            input.val(formattedPostalCode);
+        } else {
+            alert('invalid postal code');
+        }
+    });
+});
